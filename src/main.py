@@ -1,5 +1,11 @@
-url = "https://bytebank.com/exchange?originCurrency=real&destinationCurrency=dolar&quantity=100"
-print(url)
+# url = "https://bytebank.com/exchange?originCurrency=real&destinationCurrency=dolar&quantity=100"
+url = ""
+
+# url sanitization
+url = url.strip()
+
+if url == "":
+    raise ValueError("URL is empty")
 
 # separates the base and the parameters
 sep_index = url.find('?')
