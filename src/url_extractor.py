@@ -1,4 +1,7 @@
-class ExtractorUrl:
+import re
+
+
+class UrlExtractor:
 
     def __init__(self, url):
         self.url = self.sanitize_url(url)
@@ -12,6 +15,12 @@ class ExtractorUrl:
     def valid_url(self):
         if not self.url:
             raise ValueError("URL is empty")
+
+        url_pattern = re.compile('(http(s)?://)?(www.)?bytebank.com(.br)?/exchange')
+        match = url_pattern.match(self.url)
+
+        if not match:
+            raise ValueError('Invalid URL')
 
     def get_base_url(self):
         sep_index = self.url.find('?')
@@ -36,7 +45,7 @@ class ExtractorUrl:
         return value
 
 
-# extractor_url = ExtractorUrl("      ")
-extractor_url = ExtractorUrl("https://bytebank.com/exchange?originCurrency=real&destinationCurrency=dolar&quantity=100")
-quantity_value = extractor_url.get_parameter_value("quantity")
+# url_extractor = UrlExtractor("      ")
+url_extractor = UrlExtractor("https://bytebank.com/excdhange?originCurrency=real&destinationCurrency=dolar&quantity=100")
+quantity_value = url_extractor.get_parameter_value("quantity")
 print(quantity_value)
