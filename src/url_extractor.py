@@ -44,8 +44,26 @@ class UrlExtractor:
 
         return value
 
+    def __len__(self):
+        return len(self.url)
+
+    def __str__(self):
+        return self.url + '\n' + 'Parameters: ' + self.get_parameters_url() + \
+               '\n' + 'Base URL: ' + self.get_base_url()
+
+    def __eq__(self, other):
+        return self.url == other.url
+
 
 # url_extractor = UrlExtractor("      ")
-url_extractor = UrlExtractor("https://bytebank.com/excdhange?originCurrency=real&destinationCurrency=dolar&quantity=100")
-quantity_value = url_extractor.get_parameter_value("quantity")
-print(quantity_value)
+url_extractor = UrlExtractor("https://bytebank.com/exchange?originCurrency=real&destinationCurrency=dolar&quantity=100")
+url_extractor2 = UrlExtractor("https://bytebank.com/exchange?originCurrency=real&destinationCurrency=dolar&quantity=100")
+# print('URL length: ', len(url_extractor))
+# print(url_extractor)
+
+print(url_extractor == url_extractor2)
+
+# quantity_value = url_extractor.get_parameter_value("quantity")
+# print(quantity_value)
+
+
